@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Music market shifts during the pandemic</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+<style>
+  :root {
+    --ink: #1c2230; --muted: #5b6472; --line: #e6e8ee;
+    --up: #1f7a5a; --down: #b5423a; --accent: #2f5fb0; --bg: #f7f8fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 32px 20px 64px; }
+  header h1 { font-size: 1.9rem; margin: 0 0 6px; }
+  .sub { color: var(--muted); font-size: 1.02rem; margin: 0 0 18px; }
+  .banner {
+    background: #fff6e6; border: 1px solid #f0d9a8; color: #7a5a1a;
+    padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; margin-bottom: 22px;
+  }
+  .headline {
+    background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--accent);
+    padding: 16px 18px; border-radius: 8px; font-size: 1.12rem; margin-bottom: 26px;
+  }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 30px; }
+  .stat { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+  .stat .val { font-size: 1.7rem; font-weight: 700; }
+  .stat .lab { color: var(--muted); font-size: 0.86rem; margin-top: 2px; }
+  .up { color: var(--up); } .down { color: var(--down); }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 8px 8px 4px; margin-bottom: 22px; }
+  .chart { width: 100%; height: 400px; }
+  footer { color: var(--muted); font-size: 0.85rem; margin-top: 30px; border-top: 1px solid var(--line); padding-top: 14px; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>How the pandemic reshaped music listening</h1>
+    <p class="sub">An interactive companion to the PR briefing.</p>
+  </header>
+
+  <div class="banner"><strong>This is built on synthetic data.</strong></div>
+  <div class="headline" id="headline">Loading...</div>
+  <div class="stats" id="stats"></div>
+
+  <div class="card"><div id="chart-context" class="chart"></div></div>
+  <div class="card"><div id="chart-device" class="chart"></div></div>
+  <div class="card"><div id="chart-region" class="chart"></div></div>
+  <div class="card"><div id="chart-genre" class="chart"></div></div>
+  <div class="card"><div id="chart-rdd" style="width:100%;height:640px"></div></div>
+
+  <footer>
+    <p>Full write-up: <a href="https://github.com/k1monfared/music_market_shifts/blob/main/outputs/press_report.md">press_report.md</a>.
+       Method: before/after comparison plus a regression discontinuity in time at the lockdown cutoff.</p>
+    <p id="foot-meta"></p>
+    <p><a href="https://github.com/k1monfared/music_market_shifts">Source code on GitHub</a></p>
+  </footer>
+</div>
+
+<script>
+const UP = "#1f7a5a", DOWN = "#b5423a", ACCENT = "#2f5fb0", PRE = "#9fb0cc", MUTED = "#5b6472";
+// Build layouts from fresh objects each call. Plotly mutates the layout it is
+// given (including setting axis.type), so sharing one axis object across charts
+// leaks a category type onto a later chart's numeric axis and breaks its ticks.
+function baseLayout(extra) {
+  return Object.assign({
+    paper_bgcolor: "white", plot_bgcolor: "white",
+    font: { color: "#1c2230", family: "sans-serif" },
+    margin: { l: 130, r: 24, t: 48, b: 48 }
+  }, extra || {});
+}
+// Numeric value axis of a bar chart: always linear and anchored at zero.
+function valueAxis(extra) {
+  return Object.assign({
+    gridcolor: "#e6e8ee", zerolinecolor: "#5b6472",
+    type: "linear", rangemode: "tozero", automargin: true
+  }, extra || {});
+}
+// Labelled category axis of a bar chart.
+function catAxis(extra) {
+  return Object.assign({ type: "category", automargin: true }, extra || {});
+}
+const CFG = { displayModeBar: false, responsive: true };
+
+function signColor(v) { return v >= 0 ? UP : DOWN; }
+
+fetch("findings.json").then(r => r.json()).then(f => {
+  document.getElementById("headline").textContent = f.headline;
+  document.getElementById("foot-meta").textContent =
+    "Generated " + f.meta.generated_at + " from seed " + f.meta.seed + ".";
+
+  // --- stat tiles ---
+  const commute = f.context.find(r => r.context === "commute");
+  const focus = f.context.find(r => r.context === "focus_work");
+  const speaker = f.device.find(r => r.device === "smart_speaker");
+  const stats = [
+    { val: (f.totals.pct_change >= 0 ? "+" : "") + f.totals.pct_change.toFixed(1) + "%", lab: "Total streaming, pre to lockdown", cls: "" },
+    { val: commute.pct_change.toFixed(0) + "%", lab: "Commute listening " + (commute.pct_change < 0 ? "↓" : "↑"), cls: "down" },
+    { val: "+" + focus.pct_change.toFixed(0) + "%", lab: "Focus / work listening ↑", cls: "up" },
+    { val: "+" + speaker.abs_change_pp.toFixed(1) + " pts", lab: "Smart-speaker share ↑", cls: "up" }
+  ];
+  document.getElementById("stats").innerHTML = stats.map(s =>
+    `<div class="stat"><div class="val ${s.cls}">${s.val}</div><div class="lab">${s.lab}</div></div>`).join("");
+
+  // --- context shift ---
+  const ctx = [...f.context].sort((a, b) => a.pct_change - b.pct_change);
+  Plotly.newPlot("chart-context", [{
+    type: "bar", orientation: "h",
+    x: ctx.map(r => r.pct_change), y: ctx.map(r => r.label),
+    marker: { color: ctx.map(r => signColor(r.pct_change)) },
+    text: ctx.map(r => (r.pct_change >= 0 ? "+" : "") + r.pct_change.toFixed(0) + "%"),
+    textposition: "outside", hoverinfo: "x+y"
+  }], baseLayout({
+    title: "Where people listened: share change, pre-lockdown to lockdown",
+    xaxis: valueAxis({ title: "Change in share (%)", tick0: 0, dtick: 20 }),
+    yaxis: catAxis()
+  }), CFG);
+
+  // --- device grouped ---
+  const dev = [...f.device].sort((a, b) => b.lockdown_mean - a.lockdown_mean);
+  Plotly.newPlot("chart-device", [
+    { type: "bar", name: "Pre-lockdown", x: dev.map(r => r.label), y: dev.map(r => r.pre_mean * 100), marker: { color: PRE } },
+    { type: "bar", name: "Lockdown", x: dev.map(r => r.label), y: dev.map(r => r.lockdown_mean * 100), marker: { color: ACCENT } }
+  ], baseLayout({
+    title: "Device mix: share of listening (%)", barmode: "group",
+    margin: { l: 60, r: 24, t: 48, b: 48 },
+    xaxis: catAxis(),
+    yaxis: valueAxis({ title: "Share of listening (%)", tick0: 0, dtick: 10 }),
+    legend: { orientation: "h", y: 1.12, x: 0 }
+  }), CFG);
+
+  // --- region commute ---
+  const reg = f.region_commute;
+  Plotly.newPlot("chart-region", [{
+    type: "bar", x: reg.map(r => r.label), y: reg.map(r => r.pct_change),
+    marker: { color: reg.map(r => signColor(r.pct_change)) },
+    text: reg.map(r => r.pct_change.toFixed(0) + "%"), textposition: "outside"
+  }], baseLayout({
+    title: "Commute listening dropped in every region",
+    margin: { l: 60, r: 24, t: 48, b: 48 },
+    xaxis: catAxis(),
+    yaxis: valueAxis({ title: "Change (%)", tick0: 0, dtick: 20 })
+  }), CFG);
+
+  // --- genre shift ---
+  const gen = [...f.genre].sort((a, b) => a.pct_change - b.pct_change);
+  Plotly.newPlot("chart-genre", [{
+    type: "bar", orientation: "h",
+    x: gen.map(r => r.pct_change), y: gen.map(r => r.label),
+    marker: { color: gen.map(r => signColor(r.pct_change)) },
+    text: gen.map(r => (r.pct_change >= 0 ? "+" : "") + r.pct_change.toFixed(0) + "%"),
+    textposition: "outside", hoverinfo: "x+y"
+  }], baseLayout({
+    title: "Genre shift: dance down, ambient and classical up",
+    xaxis: valueAxis({ title: "Change in share (%)", tick0: 0, dtick: 20 }),
+    yaxis: catAxis()
+  }), CFG);
+
+  // --- regression discontinuity: all level breaks (share metrics) ---
+  if (f.rdd) {
+    const ctxLab = Object.fromEntries(f.context.map(r => [r.context, r.label]));
+    const devLab = Object.fromEntries(f.device.map(r => [r.device, r.label]));
+    const genLab = Object.fromEntries(f.genre.map(r => [r.genre, r.label]));
+    const rddLabel = k => {
+      if (k === "catalog_share") return "Catalog share";
+      if (k in ctxLab) return ctxLab[k];
+      if (k in devLab) return devLab[k];
+      if (k.startsWith("genre_")) return genLab[k.slice(6)] || k;
+      return k;
+    };
+    // Share metrics only (percentage points). Valence and tempo use other units.
+    const shareKeys = Object.keys(f.rdd).filter(k => k !== "mean_valence" && k !== "mean_tempo_bpm");
+    const rows = shareKeys.map(k => {
+      const r = f.rdd[k];
+      return {
+        label: rddLabel(k), b: r.level_break * 100,
+        lo: r.level_break_ci[0] * 100, hi: r.level_break_ci[1] * 100,
+        p: r.level_break_pvalue
+      };
+    }).sort((a, b) => a.b - b.b);
+    Plotly.newPlot("chart-rdd", [{
+      type: "bar", orientation: "h",
+      x: rows.map(r => r.b), y: rows.map(r => r.label),
+      marker: { color: rows.map(r => signColor(r.b)) },
+      error_x: {
+        type: "data", symmetric: false,
+        array: rows.map(r => r.hi - r.b), arrayminus: rows.map(r => r.b - r.lo),
+        color: MUTED, thickness: 1.1, width: 3
+      },
+      hovertemplate: "%{y}: %{x:.1f} pts (95% CI, p from the fit)<extra></extra>"
+    }], baseLayout({
+      title: "Regression discontinuity: level break at the lockdown cutoff (share metrics, percentage points)",
+      margin: { l: 150, r: 24, t: 56, b: 48 },
+      xaxis: valueAxis({ title: "Level break at lockdown (percentage points)", zeroline: true, tick0: 0, dtick: 5 }),
+      yaxis: catAxis()
+    }), CFG);
+  }
+
+  // Plotly can compute tick layout before the flex/grid cards reach their final
+  // size, which collapses numeric axes to a single data-value tick. Force a
+  // relayout once the browser has painted so ticks and the zero baseline settle.
+  function resizeAll() {
+    ["chart-context", "chart-device", "chart-region", "chart-genre", "chart-rdd"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && window.Plotly) window.Plotly.Plots.resize(el);
+    });
+  }
+  requestAnimationFrame(function () { requestAnimationFrame(resizeAll); });
+  window.addEventListener("resize", resizeAll);
+}).catch(e => {
+  document.getElementById("headline").textContent =
+    "Could not load findings.json. Serve this folder over HTTP (for example: python -m http.server) and reload.";
+});
+</script>
+</body>
+</html>

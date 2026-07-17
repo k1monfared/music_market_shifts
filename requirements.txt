@@ -1,0 +1,6 @@
+# Music market shifts during the pandemic: demo dependencies (FOSS only).
+# Pinned loosely; the demo was last run and verified with the versions in comments.
+numpy>=1.24        # verified with 2.5.0
+pandas>=2.0        # verified with 3.0.3
+matplotlib>=3.7    # verified with 3.11.0
+statsmodels>=0.14  # verified with 0.14.6

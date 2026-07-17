@@ -1,0 +1,679 @@
+{
+  "meta": {
+    "generated_at": "2026-07-17T06:43:29+00:00",
+    "seed": 20200311,
+    "disclaimer": "Synthetic data generated for portfolio demonstration. Not real data from any music distributor or streaming service.",
+    "timeline": {
+      "start": "2019-06-01",
+      "end": "2021-06-30"
+    },
+    "cutoffs": {
+      "lockdown": "2020-03-11",
+      "reopening": "2020-07-01"
+    },
+    "method": "Before/after period comparison plus regression discontinuity in time (interrupted time series) with Newey-West standard errors."
+  },
+  "totals": {
+    "pre_mean": 104.25478873239437,
+    "lockdown_mean": 111.71544642857143,
+    "reopening_mean": 114.3664109589041,
+    "abs_change_pp": 7.460657696177051,
+    "pct_change": 7.156177463778077,
+    "recovery_pct_of_drop": -35.53258490455961
+  },
+  "context": [
+    {
+      "context": "commute",
+      "label": "Commute",
+      "pre_mean": 0.20833225352112675,
+      "lockdown_mean": 0.05449008928571429,
+      "reopening_mean": 0.12326731506849316,
+      "abs_change_pp": -15.384216423541247,
+      "pct_change": -73.84462157695208,
+      "recovery_pct_of_drop": 44.70635610503667
+    },
+    {
+      "context": "workout",
+      "label": "Workout",
+      "pre_mean": 0.1626044014084507,
+      "lockdown_mean": 0.07373678571428573,
+      "reopening_mean": 0.11776194520547945,
+      "abs_change_pp": -8.886761569416498,
+      "pct_change": -54.65265080428902,
+      "recovery_pct_of_drop": 49.54016054926564
+    },
+    {
+      "context": "relaxation",
+      "label": "Relaxation",
+      "pre_mean": 0.24841936619718308,
+      "lockdown_mean": 0.27024241071428573,
+      "reopening_mean": 0.2682781369863013,
+      "abs_change_pp": 2.182304451710265,
+      "pct_change": 8.784759759744572,
+      "recovery_pct_of_drop": 9.000915185986154
+    },
+    {
+      "context": "focus_work",
+      "label": "Focus / work",
+      "pre_mean": 0.19903264084507044,
+      "lockdown_mean": 0.30122330357142857,
+      "reopening_mean": 0.2502548493150685,
+      "abs_change_pp": 10.219066272635812,
+      "pct_change": 51.34367021030719,
+      "recovery_pct_of_drop": 49.875842759569224
+    },
+    {
+      "context": "cooking_home",
+      "label": "Cooking / home",
+      "pre_mean": 0.18161088028169015,
+      "lockdown_mean": 0.30030767857142854,
+      "reopening_mean": 0.24043775342465756,
+      "abs_change_pp": 11.869679828973839,
+      "pct_change": 65.3577572586136,
+      "recovery_pct_of_drop": 50.439376638137055
+    }
+  ],
+  "device": [
+    {
+      "device": "car",
+      "label": "Car",
+      "pre_mean": 0.25700169014084506,
+      "lockdown_mean": 0.07664000000000001,
+      "abs_change_pp": -18.036169014084503,
+      "pct_change": -70.17918444116113
+    },
+    {
+      "device": "mobile",
+      "label": "Mobile",
+      "pre_mean": 0.35895676056338033,
+      "lockdown_mean": 0.3045939285714286,
+      "abs_change_pp": -5.4362831991951746,
+      "pct_change": -15.144674223889703
+    },
+    {
+      "device": "desktop",
+      "label": "Desktop",
+      "pre_mean": 0.21086517605633803,
+      "lockdown_mean": 0.2870723214285715,
+      "abs_change_pp": 7.6207145372233445,
+      "pct_change": 36.1402232447679
+    },
+    {
+      "device": "smart_speaker",
+      "label": "Smart speaker",
+      "pre_mean": 0.17317612676056338,
+      "lockdown_mean": 0.33169339285714283,
+      "abs_change_pp": 15.851726609657945,
+      "pct_change": 91.53528783776788
+    }
+  ],
+  "catalog": {
+    "pre_mean": 0.6324690845070422,
+    "lockdown_mean": 0.7415778571428572,
+    "reopening_mean": 0.692489205479452,
+    "abs_change_pp": 0.10910877263581498,
+    "pct_change": 17.25124204621896,
+    "recovery_pct_of_drop": 44.99056352439601
+  },
+  "mood": {
+    "valence": {
+      "pre_mean": 0.580605985915493,
+      "lockdown_mean": 0.5040892857142858,
+      "reopening_mean": 0.5470824657534246,
+      "abs_change_pp": -0.07651670020120716,
+      "pct_change": -13.178765299940284,
+      "recovery_pct_of_drop": 56.18796932706789
+    },
+    "tempo_bpm": {
+      "pre_mean": 117.82207746478873,
+      "lockdown_mean": 109.89017857142858,
+      "reopening_mean": 114.38515068493152,
+      "abs_change_pp": -7.931898893360156,
+      "pct_change": -6.732098995394656,
+      "recovery_pct_of_drop": 56.66955887783327
+    }
+  },
+  "genre": [
+    {
+      "genre": "electronic_dance",
+      "label": "Electronic / dance",
+      "pre_mean": 0.12224042253521127,
+      "lockdown_mean": 0.06867732142857143,
+      "abs_change_pp": -5.356310110663983,
+      "pct_change": -43.81783046537738
+    },
+    {
+      "genre": "latin",
+      "label": "Latin",
+      "pre_mean": 0.11660862676056338,
+      "lockdown_mean": 0.09484732142857143,
+      "abs_change_pp": -2.1761305331991956,
+      "pct_change": -18.661831406929448
+    },
+    {
+      "genre": "hip_hop",
+      "label": "Hip-hop / R&B",
+      "pre_mean": 0.15780760563380283,
+      "lockdown_mean": 0.1330025892857143,
+      "abs_change_pp": -2.480501634808854,
+      "pct_change": -15.718517652215894
+    },
+    {
+      "genre": "pop",
+      "label": "Pop",
+      "pre_mean": 0.1659412323943662,
+      "lockdown_mean": 0.14807473214285713,
+      "abs_change_pp": -1.786650025150907,
+      "pct_change": -10.766763626925822
+    },
+    {
+      "genre": "rock",
+      "label": "Rock",
+      "pre_mean": 0.12933633802816902,
+      "lockdown_mean": 0.12537928571428572,
+      "abs_change_pp": -0.3957052313883297,
+      "pct_change": -3.059505452382195
+    },
+    {
+      "genre": "country",
+      "label": "Country",
+      "pre_mean": 0.11110753521126761,
+      "lockdown_mean": 0.11353964285714287,
+      "abs_change_pp": 0.24321076458752589,
+      "pct_change": 2.188967329039097
+    },
+    {
+      "genre": "classical",
+      "label": "Classical",
+      "pre_mean": 0.09564380281690142,
+      "lockdown_mean": 0.1344938392857143,
+      "abs_change_pp": 3.885003646881287,
+      "pct_change": 40.619502073946805
+    },
+    {
+      "genre": "ambient_lofi",
+      "label": "Ambient / lo-fi",
+      "pre_mean": 0.10131429577464789,
+      "lockdown_mean": 0.1819858928571429,
+      "abs_change_pp": 8.0671597082495,
+      "pct_change": 79.62508791644944
+    }
+  ],
+  "region_commute": [
+    {
+      "region": "north_america",
+      "label": "North America",
+      "pre_mean": 0.5536600352112675,
+      "lockdown_mean": 0.27270098214285715,
+      "abs_change_pp": -28.095905306841036,
+      "pct_change": -50.74577090636514
+    },
+    {
+      "region": "europe",
+      "label": "Europe",
+      "pre_mean": 0.5411201760563381,
+      "lockdown_mean": 0.23460937499999998,
+      "abs_change_pp": -30.65108010563381,
+      "pct_change": -56.64375763812327
+    },
+    {
+      "region": "latin_america",
+      "label": "Latin America",
+      "pre_mean": 0.5496521830985915,
+      "lockdown_mean": 0.3106301785714286,
+      "abs_change_pp": -23.902200452716293,
+      "pct_change": -43.48604660854942
+    },
+    {
+      "region": "asia_pacific",
+      "label": "Asia-Pacific",
+      "pre_mean": 0.5336980633802817,
+      "lockdown_mean": 0.276848125,
+      "abs_change_pp": -25.68499383802817,
+      "pct_change": -48.12645126599712
+    }
+  ],
+  "rdd": {
+    "commute": {
+      "column": "ctx_commute",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": -0.13961585654932482,
+      "level_break_se": 0.016013682261571974,
+      "level_break_pvalue": 2.818233044740524e-18,
+      "level_break_ci": [
+        -0.1710020970418738,
+        -0.10822961605677583
+      ],
+      "slope_change_per_day": 0.00022351330223781136,
+      "slope_change_pvalue": 0.056312807873687185,
+      "pre_slope_per_day": -0.0002186242205301857,
+      "pre_level_at_cutoff": 0.2060270384295579,
+      "post_level_at_cutoff": 0.0664111818802331,
+      "r_squared": 0.950554767333592
+    },
+    "workout": {
+      "column": "ctx_workout",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": -0.08249973513439918,
+      "level_break_se": 0.010038945802715858,
+      "level_break_pvalue": 2.0698021343489696e-16,
+      "level_break_ci": [
+        -0.1021757073504718,
+        -0.06282376291832656
+      ],
+      "slope_change_per_day": 9.473674926503503e-05,
+      "slope_change_pvalue": 0.2336513790298027,
+      "pre_slope_per_day": -8.464689761515563e-05,
+      "pre_level_at_cutoff": 0.15004094719951355,
+      "post_level_at_cutoff": 0.06754121206511438,
+      "r_squared": 0.9479268747018967
+    },
+    "focus_work": {
+      "column": "ctx_focus_work",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": 0.09203330909804593,
+      "level_break_se": 0.011787764116843392,
+      "level_break_pvalue": 5.832010277881419e-15,
+      "level_break_ci": [
+        0.06892971597077928,
+        0.11513690222531257
+      ],
+      "slope_change_per_day": -0.00014211508720762687,
+      "slope_change_pvalue": 0.158132559349631,
+      "pre_slope_per_day": 0.00013265013983142365,
+      "pre_level_at_cutoff": 0.23907387405730743,
+      "post_level_at_cutoff": 0.33110718315535337,
+      "r_squared": 0.9397072533690835
+    },
+    "relaxation": {
+      "column": "ctx_relaxation",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": 0.021939385187194037,
+      "level_break_se": 0.002794112684703826,
+      "level_break_pvalue": 4.094400162261628e-15,
+      "level_break_ci": [
+        0.01646302495642802,
+        0.027415745417960054
+      ],
+      "slope_change_per_day": -4.197891255919306e-05,
+      "slope_change_pvalue": 0.46458429229792486,
+      "pre_slope_per_day": 3.0911063846077184e-05,
+      "pre_level_at_cutoff": 0.22174819899312675,
+      "post_level_at_cutoff": 0.2436875841803208,
+      "r_squared": 0.9416135329728048
+    },
+    "cooking_home": {
+      "column": "ctx_cooking_home",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": 0.1081432296024384,
+      "level_break_se": 0.01366400166846307,
+      "level_break_pvalue": 2.4832343664212997e-15,
+      "level_break_ci": [
+        0.08136227844755557,
+        0.1349241807573212
+      ],
+      "slope_change_per_day": -0.00013417306938332045,
+      "slope_change_pvalue": 0.22237027083258243,
+      "pre_slope_per_day": 0.00013972055883008819,
+      "pre_level_at_cutoff": 0.183113306275043,
+      "post_level_at_cutoff": 0.2912565358774814,
+      "r_squared": 0.9522882651232125
+    },
+    "mobile": {
+      "column": "dev_mobile",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": -0.04453166441006429,
+      "level_break_se": 0.005519474815534735,
+      "level_break_pvalue": 7.140165340862646e-16,
+      "level_break_ci": [
+        -0.05534963626208823,
+        -0.03371369255804035
+      ],
+      "slope_change_per_day": -9.290010641759135e-06,
+      "slope_change_pvalue": 0.909535191525744,
+      "pre_slope_per_day": -6.482151974377534e-05,
+      "pre_level_at_cutoff": 0.3445671278802529,
+      "post_level_at_cutoff": 0.3000354634701886,
+      "r_squared": 0.8856172855680425
+    },
+    "desktop": {
+      "column": "dev_desktop",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": 0.07587947574623281,
+      "level_break_se": 0.010387984462489685,
+      "level_break_pvalue": 2.7821137574558954e-13,
+      "level_break_ci": [
+        0.05551940032779136,
+        0.09623955116467427
+      ],
+      "slope_change_per_day": -0.00023418399336398423,
+      "slope_change_pvalue": 0.003531954042697732,
+      "pre_slope_per_day": 0.00011424636029729968,
+      "pre_level_at_cutoff": 0.23212872490105307,
+      "post_level_at_cutoff": 0.3080082006472859,
+      "r_squared": 0.9350634343780232
+    },
+    "smart_speaker": {
+      "column": "dev_smart_speaker",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": 0.12779462450873375,
+      "level_break_se": 0.014263297363259146,
+      "level_break_pvalue": 3.2561281247840385e-19,
+      "level_break_ci": [
+        0.0998390753759607,
+        0.15575017364150678
+      ],
+      "slope_change_per_day": 4.163586515768745e-05,
+      "slope_change_pvalue": 0.6916432475665253,
+      "pre_slope_per_day": 0.00018171533419023372,
+      "pre_level_at_cutoff": 0.1834528552718707,
+      "post_level_at_cutoff": 0.3112474797806044,
+      "r_squared": 0.9686254286973658
+    },
+    "car": {
+      "column": "dev_car",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": -0.15914346203570662,
+      "level_break_se": 0.0203177600816392,
+      "level_break_pvalue": 4.774012905535178e-15,
+      "level_break_ci": [
+        -0.19896554004224504,
+        -0.1193213840291682
+      ],
+      "slope_change_per_day": 0.00020182195327649537,
+      "slope_change_pvalue": 0.18461870232470423,
+      "pre_slope_per_day": -0.00023112704212176907,
+      "pre_level_at_cutoff": 0.23985135790232978,
+      "post_level_at_cutoff": 0.08070789586662316,
+      "r_squared": 0.9655212092519684
+    },
+    "catalog_share": {
+      "column": "catalog_share",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": 0.10135105892377572,
+      "level_break_se": 0.012319564054409985,
+      "level_break_pvalue": 1.9221998924660687e-16,
+      "level_break_ci": [
+        0.0772051570718979,
+        0.12549696077565353
+      ],
+      "slope_change_per_day": -9.487946980706367e-05,
+      "slope_change_pvalue": 0.3643206099659413,
+      "pre_slope_per_day": 0.00010152410660679812,
+      "pre_level_at_cutoff": 0.6316570533478213,
+      "post_level_at_cutoff": 0.733008112271597,
+      "r_squared": 0.9426660483720275
+    },
+    "mean_valence": {
+      "column": "mean_valence",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": -0.07474395037770204,
+      "level_break_se": 0.011270753090311288,
+      "level_break_pvalue": 3.319029464961867e-11,
+      "level_break_ci": [
+        -0.09683422051335568,
+        -0.052653680242048403
+      ],
+      "slope_change_per_day": 0.000145256477455926,
+      "slope_change_pvalue": 0.13244571596898075,
+      "pre_slope_per_day": -7.673666128745706e-05,
+      "pre_level_at_cutoff": 0.5718728068829935,
+      "post_level_at_cutoff": 0.4971288565052914,
+      "r_squared": 0.8807811685386647
+    },
+    "mean_tempo_bpm": {
+      "column": "mean_tempo_bpm",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": -7.310019622504055,
+      "level_break_se": 0.9028195639937624,
+      "level_break_pvalue": 5.638769542302881e-16,
+      "level_break_ci": [
+        -9.079513452469984,
+        -5.540525792538126
+      ],
+      "slope_change_per_day": 0.0070231159278326405,
+      "slope_change_pvalue": 0.478942343764016,
+      "pre_slope_per_day": -0.007728983549831305,
+      "pre_level_at_cutoff": 117.07996770885347,
+      "post_level_at_cutoff": 109.76994808634942,
+      "r_squared": 0.9197781124618415
+    },
+    "genre_pop": {
+      "column": "genre_pop",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": -0.016938575691720678,
+      "level_break_se": 0.0015441297456053734,
+      "level_break_pvalue": 5.347409044160453e-28,
+      "level_break_ci": [
+        -0.019965014380564205,
+        -0.013912137002877151
+      ],
+      "slope_change_per_day": -3.817987121956313e-05,
+      "slope_change_pvalue": 0.11799236604536506,
+      "pre_slope_per_day": 1.4328309202558112e-05,
+      "pre_level_at_cutoff": 0.16720752609081488,
+      "post_level_at_cutoff": 0.15026895039909421,
+      "r_squared": 0.6181031288730898
+    },
+    "genre_hip_hop": {
+      "column": "genre_hip_hop",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": -0.02363680171775627,
+      "level_break_se": 0.0037566432452362034,
+      "level_break_pvalue": 3.134001836651355e-10,
+      "level_break_ci": [
+        -0.0309996871811849,
+        -0.01627391625432764
+      ],
+      "slope_change_per_day": -1.2638820171382209e-05,
+      "slope_change_pvalue": 0.6992476653786632,
+      "pre_slope_per_day": -1.8584500011536883e-06,
+      "pre_level_at_cutoff": 0.15671072376792994,
+      "post_level_at_cutoff": 0.13307392205017365,
+      "r_squared": 0.7614073651777281
+    },
+    "genre_rock": {
+      "column": "genre_rock",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": -0.001469928513825297,
+      "level_break_se": 0.0015398837628046833,
+      "level_break_pvalue": 0.33979464552917926,
+      "level_break_ci": [
+        -0.004488045229300496,
+        0.0015481882016499015
+      ],
+      "slope_change_per_day": -3.8906094010818075e-06,
+      "slope_change_pvalue": 0.8768984171439006,
+      "pre_slope_per_day": -1.8138206386804556e-05,
+      "pre_level_at_cutoff": 0.12784003318935352,
+      "post_level_at_cutoff": 0.12637010467552823,
+      "r_squared": 0.12293745658000399
+    },
+    "genre_electronic_dance": {
+      "column": "genre_electronic_dance",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": -0.04964563605641428,
+      "level_break_se": 0.006664122435916225,
+      "level_break_pvalue": 9.356089646412707e-14,
+      "level_break_ci": [
+        -0.06270707601937542,
+        -0.03658419609345315
+      ],
+      "slope_change_per_day": 8.072020312405569e-05,
+      "slope_change_pvalue": 0.1433723820377881,
+      "pre_slope_per_day": -6.943281699151091e-05,
+      "pre_level_at_cutoff": 0.11675954618506224,
+      "post_level_at_cutoff": 0.06711391012864795,
+      "r_squared": 0.9407293864930332
+    },
+    "genre_latin": {
+      "column": "genre_latin",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": -0.020713314797472196,
+      "level_break_se": 0.002736460507509782,
+      "level_break_pvalue": 3.7500403489350243e-14,
+      "level_break_ci": [
+        -0.026076678837307566,
+        -0.015349950757636826
+      ],
+      "slope_change_per_day": 9.415404923737405e-05,
+      "slope_change_pvalue": 0.006040269358517699,
+      "pre_slope_per_day": -5.333356251078907e-05,
+      "pre_level_at_cutoff": 0.11353428170713498,
+      "post_level_at_cutoff": 0.09282096690966278,
+      "r_squared": 0.7973407776225573
+    },
+    "genre_classical": {
+      "column": "genre_classical",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": 0.03724462761374091,
+      "level_break_se": 0.0050173955928855245,
+      "level_break_pvalue": 1.14410604445485e-13,
+      "level_break_ci": [
+        0.027410712955495287,
+        0.04707854227198653
+      ],
+      "slope_change_per_day": -5.204272200850894e-05,
+      "slope_change_pvalue": 0.2505871122940839,
+      "pre_slope_per_day": 3.30253295823248e-05,
+      "pre_level_at_cutoff": 0.09827802830849702,
+      "post_level_at_cutoff": 0.13552265592223794,
+      "r_squared": 0.8961394620758131
+    },
+    "genre_ambient_lofi": {
+      "column": "genre_ambient_lofi",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": 0.07414188404892749,
+      "level_break_se": 0.008429011411373831,
+      "level_break_pvalue": 1.4173470142829075e-18,
+      "level_break_ci": [
+        0.05762132525735765,
+        0.09066244284049733
+      ],
+      "slope_change_per_day": -2.208977137449058e-05,
+      "slope_change_pvalue": 0.7676940676907676,
+      "pre_slope_per_day": 5.950194838163863e-05,
+      "pre_level_at_cutoff": 0.10639756283257197,
+      "post_level_at_cutoff": 0.18053944688149948,
+      "r_squared": 0.951845366704116
+    },
+    "genre_country": {
+      "column": "genre_country",
+      "cutoff": "2020-03-11",
+      "window": [
+        "2019-11-12",
+        "2020-06-30"
+      ],
+      "n_obs": 231,
+      "level_break": 0.0010195956005464102,
+      "level_break_se": 0.0007545102150077693,
+      "level_break_pvalue": 0.1765883407388117,
+      "level_break_ci": [
+        -0.00045921724683639013,
+        0.002498408447929211
+      ],
+      "slope_change_per_day": -4.605192746670749e-05,
+      "slope_change_pvalue": 0.00023188113119922423,
+      "pre_slope_per_day": 3.590748084745992e-05,
+      "pre_level_at_cutoff": 0.11327224658777442,
+      "post_level_at_cutoff": 0.11429184218832084,
+      "r_squared": 0.09527239623046524
+    }
+  },
+  "headline": "Listening did not shrink during lockdown, it relocated. Total streaming held up (about +7.2% pre to lockdown, no collapse) while commute listening fell 74% and focus-and-home listening rose 51%."
+}
